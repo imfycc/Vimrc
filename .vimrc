@@ -1,4 +1,16 @@
 
+"检测是否安装了vundle
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+if !filereadable(vundle_readme)
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	let iCanHazVundle=0
+endif
+
+
 "Vic的Vim配置文件
 set nu                                             " 显示行号  
 syntax on                                          " 语法高亮  
@@ -24,52 +36,51 @@ filetype plugin on
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-"set the runtime path to include Vundle and initialize
- set rtp+=~/.vim/bundle/Vundle.vim
- call vundle#begin()
- " alternatively, pass a path where Vundle should install plugins
- "call vundle#begin('~/some/path/here')
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
- " All of your Plugins must be added before the following line
- call vundle#end()            " required
- filetype plugin indent on    " required
- " To ignore plugin indent changes, instead use:
- "filetype plugin on
- "
- " Brief help
- " :PluginList       - lists configured plugins
- " :PluginInstall    - installs plugins; append `!` to update or just
- ":PluginUpdate
- " :PluginSearch foo - searches for foo; append `!` to refresh local cache
- " :PluginClean      - confirms removal of unused plugins; append `!` to
- "auto-approve removal
- "
- " see :h vundle for more details or wiki for FAQ
- " Put your non-Plugin stuff after this line
-
-
+" let Vundle manage Vundle, required
 "我的插件配置
- Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+ Plugin 'VundleVim/Vundle.vim'
+ Plugin 'Lokaltog/vim-powerline'
+ Plugin 'Yggdroot/indentLine'
  Plugin 'The-NERD-tree'
  "Plugin 'Shougo/neocomplete.vim'
  "Plugin 'terryma/vim-multiple-cursors'
  "Plugin 'ervandew/supertab'
  Plugin 'molokai'
- Plugin 'Valloric/YouCompleteMe'
- Plugin 'marijnh/tern_for_vim'
- Plugin 'jelera/vim-javascript-syntax'
- Plugin 'ahayman/vim-nodejs-complete'
  Plugin 'mattn/emmet-vim'
+ "Plugin 'Valloric/YouCompleteMe'
+ "Plugin 'ternjs/tern_for_vim'
+ Plugin 'mxw/vim-jsx'
+ Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'ahayman/vim-nodejs-complete'
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 
 "emmet 插件配置 
 let g:user_emmet_leader_key='<C-Y>'
 let g:user_emmet_expandabbr_key = '<Tab>'
-let g:user_emmet_mode='a'    "enable all function in all mode.
+"let g:user_emmet_mode='a'    "enable all function in all mode.
 
 "YouComplete 插件需要编译进.vim/bundle/Youcomplete/ python2.7 ./install.py
+"autocmd StdinReadPre * let s:std_in=1
+"
+"The-NERD-tree auto open start vim
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <F2> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif
 
+"vim-jsx 插件配置 在.js文件内支持jsx语法
+let g:jsx_ext_required = 0
 
-
+"ejs 高亮
+au BufNewFile,BufRead *.ejs set filetype=html
 
 set autoread                " 设置当文件被改动时自动载入
 set nobackup                " 从不备份  
@@ -77,9 +88,9 @@ set cursorline              " 突出显示当前行
 set confirm                 " 在处理未保存或只读文件的时候，弹出确认
 set autoindent              " 自动缩进
 set cindent     
-set tabstop=4               " Tab键的宽度        
-set softtabstop=4           " 统一缩进为4
-set shiftwidth=4
+set tabstop=2               " Tab键的宽度
+set softtabstop=2           " 统一缩进为2
+set shiftwidth=2
 set nocompatible            " 不要使用vi的键盘模式，而是vim自己的
 set noexpandtab             " 不要用空格代替制表符
 set nobackup                " 禁止生成临时文件
@@ -114,3 +125,7 @@ colorscheme molokai
 "自动补全css html
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags 
+
+"crontab
+autocmd filetype crontab setlocal nobackup nowritebackup
+:imap jf <Esc>
