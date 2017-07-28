@@ -3,21 +3,21 @@
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme)
-	echo "Installing Vundle.."
-	echo ""
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	let iCanHazVundle=0
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  let iCanHazVundle=0
 endif
 
 "有时间再弄，自动安转完Vundle后，再自动安装相关插件
 
 
 "Vic的Vim配置文件
-set nu                                             " 显示行号  
-syntax on                                          " 语法高亮  
-set ruler                                          " 显示标尺  
-set foldenable                                     " 允许折叠  
+set nu                                             " 显示行号
+syntax on                                          " 语法高亮
+set ruler                                          " 显示标尺
+set foldenable                                     " 允许折叠
 set mouse=a                                        " 使用鼠标
 set guifont=Monaco:h13                             " 字体设置
 
@@ -44,20 +44,22 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 "我的插件配置
  Plugin 'VundleVim/Vundle.vim'
+ "Plugin 'gko/vim-coloresque'
+ "Plugin 'airblade/vim-gitgutter'
  Plugin 'Lokaltog/vim-powerline'
+ Plugin 'scrooloose/nerdtree'
  Plugin 'Yggdroot/indentLine'
+ Plugin 'elixir-lang/vim-elixir'
+ Plugin 'dyng/ctrlsf.vim'
+ Plugin 'vim-syntastic/syntastic'
  Plugin 'mattn/emmet-vim'
  Plugin 'altercation/vim-colors-solarized'
  Plugin 'molokai'
- Plugin 'The-NERD-tree'
- Plugin 'jistr/vim-nerdtree-tabs'
- Plugin 'Xuyuanp/nerdtree-git-plugin'
+ "Plugin 'Xuyuanp/nerdtree-git-plugin'
  "Plugin 'terryma/vim-multiple-cursors'
- "Plugin 'ervandew/supertab'
  "Plugin 'ternjs/tern_for_vim'
  Plugin 'mxw/vim-jsx'
- Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'ahayman/vim-nodejs-complete'
+ "Plugin 'jelera/vim-javascript-syntax'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -85,6 +87,17 @@ let g:jsx_ext_required = 0
 "ejs 高亮
 au BufNewFile,BufRead *.ejs set filetype=html
 
+" syntastic 配置
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
 
 "Indent Guides 插件设置
 " 随 vim 自启动
@@ -96,17 +109,25 @@ let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 :nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
+"多光标配置
+"let g:multi_cursor_next_key='<C-n>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
+
 " 设置当文件被改动时自动载入
-set nobackup                " 从不备份  
+set nobackup                " 从不备份
 set cursorline              " 突出显示当前行
 set confirm                 " 在处理未保存或只读文件的时候，弹出确认
-set autoindent              " 自动缩进
-set cindent     
+set cindent
+"set wrap                    " 换行
+set display=lastline        " 单行超长文本
+set linebreak
 set tabstop=2               " Tab键的宽度
 set softtabstop=2           " 统一缩进为2
 set shiftwidth=2
 set nocompatible            " 不要使用vi的键盘模式，而是vim自己的
-set noexpandtab             " 不要用空格代替制表符
+set expandtab               " 用空格代替制表符
 set nobackup                " 禁止生成临时文件
 set noswapfile
 set ignorecase              " 搜索忽略大小写
@@ -123,6 +144,9 @@ set selectmode=mouse,key
 set report=0                " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 set matchtime=1             " 匹配括号高亮的时间（单位是十分之一秒）
 set scrolloff=3             " 光标移动到buffer的顶部和底部时保持3行距离
+"set autoindent             " 自动缩进
+set list                    " 显示空格
+set lcs=nbsp:%,trail:-      " 空格样式
 
 set fillchars=vert:\ ,stl:\ ,stlnc:\  " 在被分割的窗口间显示空白，便于阅读
 set completeopt=longest,menu   " 打开文件类型检测, 加了这句才可以用智能补全
@@ -133,11 +157,11 @@ filetype indent on          " 为特定文件类型载入相关缩进文件
 syntax enable
 
 if has('gui_running')
-	let g:solarized_termcolors=256
+  let g:solarized_termcolors=256
   set background=light
   colorscheme solarized
 else
-	"主题配置
+  "主题配置
   let g:molokai_original = 1
   let g:rehash256 = 1
   colorscheme molokai
@@ -154,9 +178,12 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 :imap jf <Esc>
 
 if has("gui_running")
-     set guioptions-=L          " 隐藏左侧滚动条
-     set guioptions-=r          " 隐藏右侧滚动条
-    "set guioptions+=b          " 显示底部滚动条
-    "set nowrap                 " 设置不自动换行
+  set guioptions-=L          " 隐藏左侧滚动条
+  set guioptions-=r          " 隐藏右侧滚动条
+  "set guioptions+=b          " 显示底部滚动条
+  "set nowrap                 " 设置不自动换行
 endif
 
+" 查看单行文字"
+map j gj
+map k gk
