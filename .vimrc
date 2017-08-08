@@ -66,12 +66,12 @@ syntax on                                          " 语法高亮
 "Vundle 插件管理
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme) 
   echo "正在安装插件管理器 Vundle.."
   echo ""
   silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   let iCanHazVundle=0
 endif
 
@@ -120,7 +120,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'jelera/vim-javascript-syntax'
 
 if iCanHazVundle == 0
-   echo "请忽略上面的错误,正在安装插件..."
+   echo "正在安装插件..."
    echo ""
    :PluginInstall
 endif
