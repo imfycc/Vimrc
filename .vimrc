@@ -137,13 +137,13 @@ let g:user_emmet_expandabbr_key = '<tab>'
 
 
 " Plugin: NERD-tree
-autocmd StdinReadPre * let s:std_in=1       " 随 vim 自启动
+autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif
-let NERDTreeShowHidden=1                    " 是否显示隐藏文件
+let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"
-noremap <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR> " F2 快捷键展示／隐藏 项目目录
-
+noremap <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>  " F2 快捷键展示／隐藏 项目目录
+let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
 
 " Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
 let g:jsx_ext_required=0
