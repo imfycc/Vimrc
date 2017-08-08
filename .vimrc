@@ -51,8 +51,11 @@ set matchtime=5                                    " 匹配括号高亮的时间
 set fillchars=vert:\ ,stl:\ ,stlnc:\               " 在被分割的窗口间显示空白，便于阅读
 set completeopt=longest,menu                       " 打开文件类型检测, 加了这句才可以用智能补全
 set autochdir                                      " 自动切换当前目录为当前文件的目录
-set guioptions-=T                                  " 隐藏工具栏
 set guioptions-=m                                  " 隐藏菜单栏
+set guioptions-=T                                  " 隐藏工具栏
+set guioptions-=L                                  " 隐藏左侧滚动条
+set guioptions-=r                                  " 隐藏右侧滚动条
+set guioptions-=b                                  " 隐藏底部滚动条
 set list                                           " 显示空格
 set listchars=tab:>-,trail:~,extends:>,precedes:<  " 显示空白字符 方便团队协作时使用规范的代码间隔
 
@@ -255,7 +258,6 @@ inoremap <M-k> <UP>
 inoremap <M-j> <DOWN>
 inoremap <M-h> <LEFT>
 
-inoremap `` <ESC>
 inoremap <C-l> <ESC>A
 inoremap <C-h> <ESC>I
 inoremap <silent><C-o> <ESC>O
