@@ -1,93 +1,159 @@
 
-"检测是否安装了vundle
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-  echo "Installing Vundle.."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  let iCanHazVundle=0
-endif
-
-"有时间再弄，自动安转完Vundle后，再自动安装相关插件
-
-
-"Vic的Vim配置文件
-set nu                                             " 显示行号
-syntax on                                          " 语法高亮
-set ruler                                          " 显示标尺
-set foldenable                                     " 允许折叠
-set mouse=a                                        " 使用鼠标
-set guifont=Monaco:h13                             " 字体设置
-
-
-"文件编码
+" 文件编码
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936t
 set fileencoding=utf-8
+set langmenu=zh_CN.UTF-8 helplang=cn
+
+set number                                         " 显示行号
+set t_Co=256                                       " 使用256色
+set laststatus=2                                   " 总是显示状态行
+set cmdheight=1                                    " 命令行（在状态行下）的高度，默认为1，这里是2
+set cursorline                                     " 突出显示当前行
+set scrolloff=3                                    " 光标移动到buffer的顶部和底部时保持3行距离
+set ruler                                          " 显示标尺
+set foldenable                                     " 允许折叠
+set guifont=Monaco:h13                             " 字体设置
+set confirm                                        " 在处理未保存或只读文件的时候，弹出确认
+"set wrap                                          " 换行
+set linebreak                                      " 合适的地方折行 ^I!@*-+_;:,./?
+set noeb                                           " 不要错误提示音
+
+"缩进
+set autoindent                                     " 语法自动缩进
+set cindent                                        " 类似C语言程序的缩进
+set tabstop=2                                      " 一个TAB字符占多少个空格的位置
+set softtabstop=2                                  " 每次退格将删除X个空格
+set shiftwidth=2                                   " 使用每层缩进的空格数。
+set backspace=2                                    " 使回格键（backspace）正常处理indent, eol, start等
+set expandtab                                      " 用空格代替Tab
+set smarttab                                       " 在行首按TAB将加入 shiftwidth 个空格
+
+set nobackup                                       " 不备份
+set noswapfile                                     " 禁止生成临时文
+set nocompatible                                   " 不要使用vi的键盘模式，而是vim自己的
+set ignorecase                                     " 搜索忽略大小写
+set smartcase                                      " 智能大小写搜索
+set hlsearch                                       " 搜索逐字符高亮
+set incsearch                                      " 输入搜索内容时就显示搜索结果
+set history=1000                                   " 记录1000条历史
+set gdefault                                       " 行内替换
+set viminfo+=!                                     " 保存全局变量
+set mouse=a                                        " 使用鼠标
+set selection=exclusive                            " 光标所在位置不属于被选中的范围
+set selectmode=mouse,key                           " 鼠标键盘都可以选择文本
+set report=0                                       " 通过使用: commands命令，告诉我们文件的哪一行被改变过
+set shortmess=atl                                  " 启动的时候不显示那个援助索马里儿童的提示
+set showmatch                                      " 高亮显示对应的括号
+set matchtime=5                                    " 匹配括号高亮的时间（单位是十分之一秒）
+set fillchars=vert:\ ,stl:\ ,stlnc:\               " 在被分割的窗口间显示空白，便于阅读
+set completeopt=longest,menu                       " 打开文件类型检测, 加了这句才可以用智能补全
+set autochdir                                      " 自动切换当前目录为当前文件的目录
+set guioptions-=T                                  " 隐藏工具栏
+set guioptions-=m                                  " 隐藏菜单栏
+set list                                           " 显示空格
+set listchars=tab:>-,trail:~,extends:>,precedes:<  " 显示空白字符 方便团队协作时使用规范的代码间隔
+
+filetype on                                        " 侦测文件类型
+filetype indent on                                 " 为特定文件类型载入相关缩进文件
+filetype plugin indent on                          " 开启插件
+syntax on                                          " 语法高亮
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle 插件管理
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme) 
+  echo "正在安装插件管理器 Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/vundle
+  let iCanHazVundle=0
+endif
 
+set nocompatible              " be iMproved, required
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-"我的插件配置
- Plugin 'VundleVim/Vundle.vim'
- "Plugin 'gko/vim-coloresque'
- "Plugin 'airblade/vim-gitgutter'
- Plugin 'Lokaltog/vim-powerline'
- Plugin 'scrooloose/nerdtree'
- Plugin 'Yggdroot/indentLine'
- Plugin 'elixir-lang/vim-elixir'
- Plugin 'dyng/ctrlsf.vim'
- Plugin 'vim-syntastic/syntastic'
- Plugin 'mattn/emmet-vim'
- Plugin 'altercation/vim-colors-solarized'
- Plugin 'molokai'
- "Plugin 'Xuyuanp/nerdtree-git-plugin'
- "Plugin 'terryma/vim-multiple-cursors'
- "Plugin 'ternjs/tern_for_vim'
- Plugin 'mxw/vim-jsx'
- "Plugin 'jelera/vim-javascript-syntax'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'gko/vim-coloresque'
+Plugin 'posva/vim-vue'
+Plugin 'tpope/vim-rails'
+Plugin 'Keithbsmiley/rspec.vim'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'godlygeek/tabular'
+"Plugin 'airblade/vim-gitgutter'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Yggdroot/indentLine'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'mattn/emmet-vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'molokai'
+Plugin 'sjl/gundo.vim'
+Plugin 'vim-scripts/WebAPI.vim'
+"Plugin 'digitaltoad/vim-jade'
+"Plugin 'slim-template/vim-slim'
+"Plugin 'groenewege/vim-less'
+"Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-dispatch'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+"Plugin 'honza/vim-snippets'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'rizzatti/dash.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'evanmiller/nginx-vim-syntax'
+"Plugin 'AndrewRadev/vim-eco'
+"Plugin 'hsanson/vim-android'
+"Plugin 'jeroenbourgois/vim-actionscript'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
+"Plugin 'terryma/vim-multiple-cursors'
+Plugin 'mxw/vim-jsx'
+Plugin 'jelera/vim-javascript-syntax'
+
+if iCanHazVundle == 0
+   echo "请忽略上面的错误,正在安装插件..."
+   echo ""
+   :PluginInstall
+endif
 
 call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin indent on
 
-"emmet 插件配置 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Plugin: emmet
 "let g:user_emmet_leader_key='<C-D>'
 let g:user_emmet_expandabbr_key = '<tab>'
 "let g:user_emmet_mode='a'    "enable all function in all mode.
 
-"The-NERD-tree auto open start vim
+
+" Plugin: NERD-tree
+" 随 vim 自启动
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <F2> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif
-" 是否显示隐藏文件
-let NERDTreeShowHidden=1
-
+let NERDTreeShowHidden=1                " 是否显示隐藏文件
 let NERDTreeWinPos="right"
+noremap <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>
 
-"vim-jsx 插件配置 在.js文件内支持jsx语法
+
+" Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
 let g:jsx_ext_required = 0
 
-"ejs 高亮
-au BufNewFile,BufRead *.ejs set filetype=html
 
-" syntastic 配置
+" Plugin: syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -99,7 +165,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
 
-"Indent Guides 插件设置
+"  Plugin: Indent Guides
 " 随 vim 自启动
 let g:indent_guides_enable_on_vim_startup=1
 " 从第二层开始可视化显示缩进
@@ -109,81 +175,108 @@ let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 :nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
-"多光标配置
+" Plugin: Rails
+let g:rails_statusline=0
+
+
+" Plugin: multi_cursor
 "let g:multi_cursor_next_key='<C-n>'
 "let g:multi_cursor_prev_key='<C-p>'
 "let g:multi_cursor_skip_key='<C-x>'
 "let g:multi_cursor_quit_key='<Esc>'
 
-" 设置当文件被改动时自动载入
-set nobackup                " 从不备份
-set cursorline              " 突出显示当前行
-set confirm                 " 在处理未保存或只读文件的时候，弹出确认
-set cindent
-"set wrap                    " 换行
-set display=lastline        " 单行超长文本
-set linebreak
-set tabstop=2               " Tab键的宽度
-set softtabstop=2           " 统一缩进为2
-set shiftwidth=2
-set nocompatible            " 不要使用vi的键盘模式，而是vim自己的
-set expandtab               " 用空格代替制表符
-set nobackup                " 禁止生成临时文件
-set noswapfile
-set ignorecase              " 搜索忽略大小写
-set hlsearch                " 搜索逐字符高亮
-set incsearch
-set gdefault                " 行内替换
-set laststatus=2            " 总是显示状态行
-set cmdheight=1             " 命令行（在状态行下）的高度，默认为1，这里是2
-set viminfo+=!              " 保存全局变量
-set backspace=2             " 使回格键（backspace）正常处理indent, eol, start等
-set mouse=a                 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
-set selection=exclusive
-set selectmode=mouse,key
-set report=0                " 通过使用: commands命令，告诉我们文件的哪一行被改变过
-set matchtime=1             " 匹配括号高亮的时间（单位是十分之一秒）
-set scrolloff=3             " 光标移动到buffer的顶部和底部时保持3行距离
-"set autoindent             " 自动缩进
-set list                    " 显示空格
-set lcs=nbsp:%,trail:-      " 空格样式
 
-set fillchars=vert:\ ,stl:\ ,stlnc:\  " 在被分割的窗口间显示空白，便于阅读
-set completeopt=longest,menu   " 打开文件类型检测, 加了这句才可以用智能补全
+let g:vim_markdown_folding_disabled = 1
+let g:tick_fmt_autosave = 0
 
-filetype on                 " 侦测文件类型
-filetype indent on          " 为特定文件类型载入相关缩进文件
 
-syntax enable
-
+"主题设置
 if has('gui_running')
+  syntax enable
   let g:solarized_termcolors=256
   set background=light
   colorscheme solarized
 else
-  "主题配置
   let g:molokai_original = 1
   let g:rehash256 = 1
   colorscheme molokai
 endif
 
 
-"自动补全css html
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 快捷键设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"crontab
-autocmd filetype crontab setlocal nobackup nowritebackup
 :imap jf <Esc>
-
-if has("gui_running")
-  set guioptions-=L          " 隐藏左侧滚动条
-  set guioptions-=r          " 隐藏右侧滚动条
-  "set guioptions+=b          " 显示底部滚动条
-  "set nowrap                 " 设置不自动换行
-endif
+inoremap <leader>d <ESC>dd
 
 " 查看单行文字"
 map j gj
 map k gk
+
+"<Ctrl-s> for saving
+map <silent><C-s> :update<CR>
+inoremap <C-s> <ESC>:update<CR>a
+
+
+" key-mappings for comment line in normal mode
+nnoremap <silent> cm :call CommentLine()<CR>
+" key-mappings for range comment lines in visual <Shift-V> mode
+vnoremap <silent> cm :call RangeCommentLine()<CR>
+
+" key-mappings for un-comment line in normal mode
+nnoremap <silent> cu :call UnCommentLine()<CR>
+" key-mappings for range un-comment lines in visual <Shift-V> mode
+vnoremap <silent> cu :call RangeUnCommentLine()<CR>
+
+" key-mapping for CtrlSF plugin
+nnoremap <silent> <leader>f :CtrlSF<CR>
+nmap <silent> <leader>d <Plug>DashSearch
+
+au FileType ruby nnoremap <buffer> <leader>r :!ruby "%"<CR>
+au FileType javascript nnoremap <buffer> <leader>r :!node "%"<CR>
+au FileType vim nnoremap <buffer> <leader>r :so %<CR>
+au FileType sh  nnoremap <buffer> <leader>r :!sh "%"<CR>
+au FileType actionscript set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
+au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
+"自动补全css html
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd! BufRead,BufNewFile *.less set filetype=less
+"ejs 高亮
+au BufNewFile,BufRead *.ejs set filetype=html
+"crontab
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+" key-mappings for <Alt-[hjkl]> moving cursor in insert mode
+inoremap <M-l> <RIGHT>
+inoremap <M-k> <UP>
+inoremap <M-j> <DOWN>
+inoremap <M-h> <LEFT>
+
+inoremap `` <ESC>
+inoremap <C-l> <ESC>A
+inoremap <C-h> <ESC>I
+inoremap <silent><C-o> <ESC>O
+
+nnoremap <C-d> yyp
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" <Alt + [1-5]> goto tab in position i
+nnoremap <M-1> 1gt
+nnoremap <M-2> 2gt
+nnoremap <M-3> 3gt
+nnoremap <M-4> 4gt
+nnoremap <M-5> 5gt
+
+nnoremap <C-z> :shell<CR>
+
+vnoremap " <ESC>i"<ESC>gvo<ESC>i"<ESC>
+vnoremap ' <ESC>i'<ESC>gvo<ESC>i'<ESC>
+
+" hit <leader> twice to auto align codes
+noremap <leader><leader> :Tabularize /=<CR>
+noremap <leader>;        :Tabularize /:/l0<CR>
+
