@@ -84,43 +84,37 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'gko/vim-coloresque'
-Plugin 'posva/vim-vue'
-Plugin 'tpope/vim-rails'
-Plugin 'Keithbsmiley/rspec.vim'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'godlygeek/tabular'
-"Plugin 'airblade/vim-gitgutter'
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
+"Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/indentLine'
-Plugin 'elixir-lang/vim-elixir'
+Plugin 'gko/vim-coloresque'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'mattn/emmet-vim'
+Plugin 'godlygeek/tabular'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'molokai'
-Plugin 'sjl/gundo.vim'
+"Plugin 'airblade/vim-gitgutter'
+Plugin 'posva/vim-vue'
+Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-rails'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'suan/vim-instant-markdown'
 Plugin 'vim-scripts/WebAPI.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'vim-syntastic/syntastic'
 "Plugin 'digitaltoad/vim-jade'
 "Plugin 'slim-template/vim-slim'
 "Plugin 'groenewege/vim-less'
 "Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-dispatch'
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
-"Plugin 'honza/vim-snippets'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'rizzatti/dash.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'evanmiller/nginx-vim-syntax'
-"Plugin 'AndrewRadev/vim-eco'
 "Plugin 'hsanson/vim-android'
 "Plugin 'jeroenbourgois/vim-actionscript'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
-"Plugin 'terryma/vim-multiple-cursors'
-Plugin 'mxw/vim-jsx'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'tpope/vim-dispatch'
+"Plugin 'terryma/vim-multiple-cursors'
+Plugin 'sjl/gundo.vim'
+Plugin 'Keithbsmiley/rspec.vim'
 
 if iCanHazVundle == 0
    echo "正在安装插件..."
@@ -143,17 +137,16 @@ let g:user_emmet_expandabbr_key = '<tab>'
 
 
 " Plugin: NERD-tree
-" 随 vim 自启动
-autocmd StdinReadPre * let s:std_in=1
+autocmd StdinReadPre * let s:std_in=1       " 随 vim 自启动
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif
-let NERDTreeShowHidden=1                " 是否显示隐藏文件
+let NERDTreeShowHidden=1                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"
-noremap <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>
+noremap <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR> " F2 快捷键展示／隐藏 项目目录
 
 
 " Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
-let g:jsx_ext_required = 0
+let g:jsx_ext_required=0
 
 
 " Plugin: syntastic
@@ -163,20 +156,17 @@ set statusline+=%*
 
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 1 "打开文件的时候就开启语法检查
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 
 
-"  Plugin: Indent Guides
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=1
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=2
-" 色块宽度
-let g:indent_guides_guide_size=1
-" 快捷键 i 开/关缩进可视化
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+" Plugin: Indent Guides
+let g:indent_guides_enable_on_vim_startup=1          " 随 vim 自启动
+let g:indent_guides_start_level=2                    " 从第二层开始可视化显示缩进
+let g:indent_guides_guide_size=1                     " 色块宽度
+:nmap <silent> <Leader>i <Plug>IndentGuidesToggle    " 快捷键 i 开/关缩进可视化
+
 
 " Plugin: Rails
 let g:rails_statusline=0
@@ -188,6 +178,17 @@ let g:rails_statusline=0
 "let g:multi_cursor_skip_key='<C-x>'
 "let g:multi_cursor_quit_key='<Esc>'
 
+" Plugin: Tabularize
+" hit <leader> twice to auto align codes
+noremap <leader><leader> :Tabularize /=<CR>
+noremap <leader>;        :Tabularize /:/l0<CR>
+
+
+" Plugin: CtrlSF
+nnoremap <silent> <leader>f :CtrlSF<CR>
+
+" Plugin: gundo
+nnoremap <F5> :GundoToggle<CR>
 
 let g:vim_markdown_folding_disabled = 1
 let g:tick_fmt_autosave = 0
@@ -205,13 +206,19 @@ else
   colorscheme molokai
 endif
 
-
+" 输入法自动切换
+set noimd
+set imactivatekey=S
+if has("gui_running")
+  set imi=2
+  set ims=2
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-:imap jf <Esc>
+:imap jf <Esc>  "esc 映射
 inoremap <leader>d <ESC>dd
 
 " 查看单行文字"
@@ -221,21 +228,6 @@ map k gk
 "<Ctrl-s> for saving
 map <silent><C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>a
-
-
-" key-mappings for comment line in normal mode
-nnoremap <silent> cm :call CommentLine()<CR>
-" key-mappings for range comment lines in visual <Shift-V> mode
-vnoremap <silent> cm :call RangeCommentLine()<CR>
-
-" key-mappings for un-comment line in normal mode
-nnoremap <silent> cu :call UnCommentLine()<CR>
-" key-mappings for range un-comment lines in visual <Shift-V> mode
-vnoremap <silent> cu :call RangeUnCommentLine()<CR>
-
-" key-mapping for CtrlSF plugin
-nnoremap <silent> <leader>f :CtrlSF<CR>
-nmap <silent> <leader>d <Plug>DashSearch
 
 au FileType ruby nnoremap <buffer> <leader>r :!ruby "%"<CR>
 au FileType javascript nnoremap <buffer> <leader>r :!node "%"<CR>
@@ -277,8 +269,4 @@ nnoremap <C-z> :shell<CR>
 
 vnoremap " <ESC>i"<ESC>gvo<ESC>i"<ESC>
 vnoremap ' <ESC>i'<ESC>gvo<ESC>i'<ESC>
-
-" hit <leader> twice to auto align codes
-noremap <leader><leader> :Tabularize /=<CR>
-noremap <leader>;        :Tabularize /:/l0<CR>
 

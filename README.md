@@ -32,13 +32,13 @@
 
 下载使用即可。
 
-第一次打开 `Vim` 的时候，会自动安装 Vundle 和相关的插件。（大约两分钟左右）
+第一次打开 `Vim` 的时候，会自动安装 Vundle 和相关的插件。（大约一分钟左右）
 
 ## Markdown 实时预览
 
 使用 Vim 打开或者新建 `*.md` 文件时，会自动打开浏览器实时展示内容。
 
-### 如果已经安装了 Node.js
+### 如果已经安装了 [Node.js](https://nodejs.org/en/)
 
 ```
 npm -g install instant-markdown-d
