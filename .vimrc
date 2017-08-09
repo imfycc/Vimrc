@@ -14,7 +14,7 @@ set cmdheight=1                                    " 命令行（在状态行下
 set cursorline                                     " 突出显示当前行
 set scrolloff=3                                    " 光标移动到buffer的顶部和底部时保持3行距离
 set ruler                                          " 显示标尺
-set foldenable                                     " 允许折叠
+set nofoldenable                                   " 不允许折叠
 set guifont=Monaco:h13                             " 字体设置
 set confirm                                        " 在处理未保存或只读文件的时候，弹出确认
 "set wrap                                          " 换行
@@ -190,7 +190,7 @@ nnoremap <silent> <leader>f :CtrlSF<CR>
 " Plugin: gundo
 nnoremap <F5> :GundoToggle<CR>
 
-let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_disabled = 0
 let g:tick_fmt_autosave = 0
 
 
