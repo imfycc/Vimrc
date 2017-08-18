@@ -15,6 +15,7 @@
 * 空格补全
 * [solarized](https://github.cooooooooooooom/altercation/vim-colors-solarized) 主题
 * 各设置均带注释方便学习
+* 完美解决中文输入法问题
 
 ## 内置插件
 
@@ -26,7 +27,6 @@
 
 [Gundo](https://github.com/sjl/gundo.vim)  历史版本可视化
 
-[SnipMate](https://github.com/garbas/vim-snipmate)
 ...
 
 ## 安装
@@ -35,10 +35,16 @@
 
 第一次打开 `Vim` 的时候，会自动安装 Vundle 和相关的插件。（大约一分钟左右）
 
-如果启用 [ctrlsf.vim](https://github.com/dyng/ctrlsf.vim) 插件 (项目内搜索)，`Mac OS` 需要预装 `ack`
+如果启用 [ctrlsf.vim](https://github.com/dyng/ctrlsf.vim) 插件（项目内搜索），`Mac OS` 需要预装 `ack`
 
 ```
 brew install ack
+```
+
+如果启用 `fcitx-vim-osx'` 插件（输入法问题），要预装 `fcitx-remote-for-osx`
+
+```
+brew install fcitx-remote-for-osx
 ```
 
 ## Markdown 实时预览
@@ -51,5 +57,10 @@ brew install ack
 npm -g install instant-markdown-d
 ```
 
+## Vim 内输入法切换
+
+[fcitx-remote-for-osx](https://github.com/CodeFalling/fcitx-remote-for-osx)
+
 ## 截图
 ![Vim 效果图](https://ws2.sinaimg.cn/large/006tNc79ly1ficcyg7glkj31kw0v9qf1.jpg)
+

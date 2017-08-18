@@ -85,22 +85,25 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/indentLine'
+Plugin 'CodeFalling/fcitx-vim-osx'
 Plugin 'gko/vim-coloresque'
 Plugin 'dyng/ctrlsf.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'molokai'
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'posva/vim-vue'
 Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-rails'
+"Plugin 'tpope/vim-rails'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'suan/vim-instant-markdown'
-Plugin 'vim-scripts/WebAPI.vim'
+"Plugin 'vim-scripts/WebAPI.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'vim-syntastic/syntastic'
 "Plugin 'digitaltoad/vim-jade'
@@ -111,10 +114,10 @@ Plugin 'vim-syntastic/syntastic'
 "Plugin 'jeroenbourgois/vim-actionscript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'tpope/vim-dispatch'
+"Plugin 'tpope/vim-dispatch'
 "Plugin 'terryma/vim-multiple-cursors'
 Plugin 'sjl/gundo.vim'
-Plugin 'Keithbsmiley/rspec.vim'
+"Plugin 'Keithbsmiley/rspec.vim'
 
 if iCanHazVundle == 0
    echo "正在安装插件..."
@@ -134,7 +137,7 @@ filetype plugin indent on
 "let g:user_emmet_leader_key='<C-D>'
 let g:user_emmet_expandabbr_key = '<tab>'
 "let g:user_emmet_mode='a'    "enable all function in all mode.
-
+autocmd Filetype javascript.jsx setlocal filetype=jsx
 
 " Plugin: NERD-tree
 autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
@@ -165,7 +168,9 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:indent_guides_enable_on_vim_startup=1          " 随 vim 自启动
 let g:indent_guides_start_level=2                    " 从第二层开始可视化显示缩进
 let g:indent_guides_guide_size=1                     " 色块宽度
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+" 禁止隐藏 比如 json 的双引号
+autocmd InsertEnter *.json setlocal concealcursor=
+autocmd InsertLeave *.json setlocal concealcursor=inc
 
 
 " Plugin: Rails
@@ -190,9 +195,12 @@ nnoremap <silent> <leader>f :CtrlSF<CR>
 " Plugin: gundo
 nnoremap <F5> :GundoToggle<CR>
 
-let g:vim_markdown_folding_disabled = 0
-let g:tick_fmt_autosave = 0
+" Plugin: vim-markdown
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_autowrite = 1
 
+let g:tick_fmt_autosave = 0
 
 "主题设置
 if has('gui_running')
@@ -244,29 +252,8 @@ au BufNewFile,BufRead *.ejs set filetype=html
 "crontab
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-" key-mappings for <Alt-[hjkl]> moving cursor in insert mode
-inoremap <M-l> <RIGHT>
-inoremap <M-k> <UP>
-inoremap <M-j> <DOWN>
-inoremap <M-h> <LEFT>
-
-inoremap <C-l> <ESC>A
-inoremap <C-h> <ESC>I
-inoremap <silent><C-o> <ESC>O
-
-nnoremap <C-d> yyp
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" <Alt + [1-5]> goto tab in position i
-nnoremap <M-1> 1gt
-nnoremap <M-2> 2gt
-nnoremap <M-3> 3gt
-nnoremap <M-4> 4gt
-nnoremap <M-5> 5gt
-
 nnoremap <C-z> :shell<CR>
-
-vnoremap " <ESC>i"<ESC>gvo<ESC>i"<ESC>
-vnoremap ' <ESC>i'<ESC>gvo<ESC>i'<ESC>
 
