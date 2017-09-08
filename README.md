@@ -15,7 +15,6 @@
 * 空格补全
 * [solarized](https://github.cooooooooooooom/altercation/vim-colors-solarized) 主题
 * 各设置均带注释方便学习
-* 完美解决中文输入法问题
 
 ## 内置插件
 
@@ -41,12 +40,6 @@
 brew install ack
 ```
 
-如果启用 `fcitx-vim-osx'` 插件（输入法问题），要预装 `fcitx-remote-for-osx`
-
-```
-brew install fcitx-remote-for-osx
-```
-
 ## Markdown 实时预览
 
 使用 Vim 打开或者新建 `*.md` 文件时，会自动打开浏览器实时展示内容。
@@ -56,10 +49,6 @@ brew install fcitx-remote-for-osx
 ```
 npm -g install instant-markdown-d
 ```
-
-## Vim 内输入法切换
-
-[fcitx-remote-for-osx](https://github.com/CodeFalling/fcitx-remote-for-osx)
 
 ## 截图
 ![Vim 效果图](https://ws2.sinaimg.cn/large/006tNc79ly1ficcyg7glkj31kw0v9qf1.jpg)

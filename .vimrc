@@ -84,15 +84,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'yianwillis/vimcdoc'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/indentLine'
-Plugin 'CodeFalling/fcitx-vim-osx'
 Plugin 'gko/vim-coloresque'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'molokai'
@@ -215,18 +215,18 @@ else
 endif
 
 " 输入法自动切换
-set noimd
-set imactivatekey=S
-if has("gui_running")
-  set imi=2
-  set ims=2
-endif
+"set noimd
+"set imactivatekey=S
+"if has("gui_running")
+"  set imi=2
+"  set ims=2
+"endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-:imap jf <Esc>
+:imap jk <Esc>
 inoremap <leader>d <ESC>dd
 
 " 查看单行文字"
