@@ -134,8 +134,8 @@ filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugin: emmet
-"let g:user_emmet_leader_key='<C-D>'
-let g:user_emmet_expandabbr_key = '<tab>'
+let g:user_emmet_leader_key='<C-D>'
+"let g:user_emmet_expandabbr_key = '<tab>'
 "let g:user_emmet_mode='a'    "enable all function in all mode.
 autocmd Filetype javascript.jsx setlocal filetype=jsx
 
@@ -188,10 +188,6 @@ let g:rails_statusline=0
 noremap <leader><leader> :Tabularize /=<CR>
 noremap <leader>;        :Tabularize /:/l0<CR>
 
-
-" Plugin: CtrlSF
-nnoremap <silent> <leader>f :CtrlSF<CR>
-
 " Plugin: gundo
 nnoremap <F5> :GundoToggle<CR>
 
@@ -228,6 +224,10 @@ endif
 
 :imap jk <Esc>
 inoremap <leader>d <ESC>dd
+
+"输入tn 点击空格 自动补全命令
+ca tn tabnew
+ca cf CtrlSF
 
 " 查看单行文字"
 map j gj
