@@ -84,18 +84,23 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'yianwillis/vimcdoc'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'Yggdroot/indentLine'
 Plugin 'gko/vim-coloresque'
 Plugin 'dyng/ctrlsf.vim'
 "Plugin 'kien/ctrlp.vim'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'tpope/vim-surround'
+"Plugin 'vim-scripts/vim-auto-save'
 Plugin 'godlygeek/tabular'
+"Plugin: Themes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'molokai'
+Plugin 'dracula/vim'
+"Plugin 'ashfinal/vim-colors-violet'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'posva/vim-vue'
 Plugin 'mxw/vim-jsx'
@@ -108,7 +113,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'vim-syntastic/syntastic'
 "Plugin 'digitaltoad/vim-jade'
 "Plugin 'slim-template/vim-slim'
-"Plugin 'groenewege/vim-less'
+Plugin 'groenewege/vim-less'
 "Plugin 'kchmck/vim-coffee-script'
 "Plugin 'hsanson/vim-android'
 "Plugin 'jeroenbourgois/vim-actionscript'
@@ -157,6 +162,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Plugin: auto-save
+let g:auto_save = 1  " enable AutoSave on Vim startup
+
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1 "打开文件的时候就开启语法检查
@@ -204,11 +212,22 @@ if has('gui_running')
   let g:solarized_termcolors=256
   set background=light
   colorscheme solarized
+  "colorscheme dracula
+  "colorscheme violet
 else
   let g:molokai_original = 1
   let g:rehash256 = 1
   colorscheme molokai
 endif
+
+nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
+function! ToggleBackground()
+    if &background == "light"
+        set background=dark
+    else
+        set background=light
+    endif
+endfunction
 
 " 输入法自动切换
 "set noimd
@@ -242,7 +261,10 @@ au FileType javascript nnoremap <buffer> <leader>r :!node "%"<CR>
 au FileType vim nnoremap <buffer> <leader>r :so %<CR>
 au FileType sh  nnoremap <buffer> <leader>r :!sh "%"<CR>
 au FileType actionscript set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
+
+"小程序 .wpy 后缀识别成 vue 文件
 au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
+
 "自动补全css html
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -256,4 +278,11 @@ nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 nnoremap <C-z> :shell<CR>
+
+"自动补全括号
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap { {}<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
 
