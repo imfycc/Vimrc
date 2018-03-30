@@ -66,69 +66,38 @@ syntax on                                          " 语法高亮
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Vundle 插件管理
+"vim-plug 插件管理
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme) 
-  echo "正在安装插件管理器 Vundle.."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-  let iCanHazVundle=0
+
+"初始化 自动安装插件
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set nocompatible              " be iMproved, required
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" 插件管理
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'Yggdroot/indentLine'
-Plugin 'gko/vim-coloresque'
-Plugin 'dyng/ctrlsf.vim'
-"Plugin 'kien/ctrlp.vim'
-"Plugin 'SirVer/ultisnips'
-"Plugin 'scrooloose/nerdcommenter'
-"Plugin 'tpope/vim-surround'
-"Plugin 'vim-scripts/vim-auto-save'
-Plugin 'godlygeek/tabular'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'posva/vim-vue'
-Plugin 'mxw/vim-jsx'
-"Plugin 'tpope/vim-rails'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
-"Plugin 'vim-scripts/WebAPI.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'vim-syntastic/syntastic'
-"Plugin 'digitaltoad/vim-jade'
-"Plugin 'slim-template/vim-slim'
-Plugin 'groenewege/vim-less'
-"Plugin 'kchmck/vim-coffee-script'
-"Plugin 'hsanson/vim-android'
-"Plugin 'jeroenbourgois/vim-actionscript'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'evanmiller/nginx-vim-syntax'
-"Plugin 'tpope/vim-dispatch'
-"Plugin 'terryma/vim-multiple-cursors'
-Plugin 'sjl/gundo.vim'
-"Plugin 'Keithbsmiley/rspec.vim'
+Plug 'scrooloose/nerdtree'                     " 项目目录树
+Plug 'jistr/vim-nerdtree-tabs'                 " 标签页项目树
+Plug 'bling/vim-airline'                       " 状态栏显示
+Plug 'airblade/vim-gitgutter'                  " git 显示文件的修改情况
+Plug 'Yggdroot/indentLine'                     " 展示代码缩进对齐线
+Plug 'mileszs/ack.vim'                         " ag 文件内容搜索
+Plug 'altercation/vim-colors-solarized'        " solarized 主题
+Plug 'posva/vim-vue'                           " 前端库 Vue
+Plug 'groenewege/vim-less'                     " 前端 less
+Plug 'pangloss/vim-javascript'                 " 前端 js
+Plug 'mxw/vim-jsx'                             " 前端库 React
+Plug 'mattn/emmet-vim'                         " 前端 快捷补全
+Plug 'gko/vim-coloresque'                      " CSS颜色显示
+Plug 'elixir-lang/vim-elixir'                  " 新语言 elixir
+Plug 'rhysd/vim-gfm-syntax'                    " markdown
+Plug 'suan/vim-instant-markdown'               " markdown 预览
+Plug 'Raimondi/delimitMate'                    " 引号、括号自动匹配
 
-if iCanHazVundle == 0
-   echo "正在安装插件..."
-   echo ""
-   :PluginInstall
-endif
-
-call vundle#end()            " required
-filetype plugin indent on
-
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件设置
@@ -136,8 +105,6 @@ filetype plugin indent on
 
 " Plugin: emmet
 let g:user_emmet_leader_key='<C-D>'
-"let g:user_emmet_expandabbr_key = '<tab>'
-"let g:user_emmet_mode='a'    "enable all function in all mode.
 autocmd Filetype javascript.jsx setlocal filetype=jsx
 
 " Plugin: NERD-tree
@@ -145,28 +112,11 @@ autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif
 let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
-let NERDTreeWinPos="right"
-noremap <F2> :NERDTreeToggle \| :silent NERDTreeMirror<CR>  " F2 快捷键展示／隐藏 项目目录
+let NERDTreeWinPos="right"                                  " 在右边显示
 let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
 
 " Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
 let g:jsx_ext_required=0
-
-
-" Plugin: syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" Plugin: auto-save
-let g:auto_save = 1  " enable AutoSave on Vim startup
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1 "打开文件的时候就开启语法检查
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-
 
 " Plugin: Indent Guides
 let g:indent_guides_enable_on_vim_startup=1          " 随 vim 自启动
@@ -176,31 +126,11 @@ let g:indent_guides_guide_size=1                     " 色块宽度
 autocmd InsertEnter *.json setlocal concealcursor=
 autocmd InsertLeave *.json setlocal concealcursor=inc
 
+" Plugin: ack.vim 使用 ag 在项目内搜索文件内容"
+let g:ackprg = 'ag --vimgrep'
 
-" Plugin: Rails
-let g:rails_statusline=0
-
-
-" Plugin: multi_cursor
-"let g:multi_cursor_next_key='<C-n>'
-"let g:multi_cursor_prev_key='<C-p>'
-"let g:multi_cursor_skip_key='<C-x>'
-"let g:multi_cursor_quit_key='<Esc>'
-
-" Plugin: Tabularize
-" hit <leader> twice to auto align codes
-noremap <leader><leader> :Tabularize /=<CR>
-noremap <leader>;        :Tabularize /:/l0<CR>
-
-" Plugin: gundo
-nnoremap <F5> :GundoToggle<CR>
-
-" Plugin: vim-markdown
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_autowrite = 1
-
-let g:tick_fmt_autosave = 0
+" Plugin: vim-jsx .js 后缀的 jsx 文件
+let g:jsx_ext_required = 0
 
 "主题设置
 if has('gui_running')
@@ -214,6 +144,7 @@ else
   colorscheme desert
 endif
 
+" 背景颜色切换 \ + b
 nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
 function! ToggleBackground()
     if &background == "light"
@@ -223,24 +154,12 @@ function! ToggleBackground()
     endif
 endfunction
 
-" 输入法自动切换
-"set noimd
-"set imactivatekey=S
-"if has("gui_running")
-"  set imi=2
-"  set ims=2
-"endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" 映射 ESC 键接口：接口：w
 :imap jk <Esc>
-inoremap <leader>d <ESC>dd
-
-"输入tn 点击空格 自动补全命令
-ca tn tabnew
-ca cf CtrlSF
 
 " 查看单行文字"
 map j gj
@@ -250,34 +169,12 @@ map k gk
 map <silent><C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>a
 
-au FileType ruby nnoremap <buffer> <leader>r :!ruby "%"<CR>
-au FileType javascript nnoremap <buffer> <leader>r :!node "%"<CR>
-au FileType vim nnoremap <buffer> <leader>r :so %<CR>
-au FileType sh  nnoremap <buffer> <leader>r :!sh "%"<CR>
-au FileType actionscript set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
-
 "小程序 .wpy 后缀识别成 vue 文件
 au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
 
-"自动补全css html
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd! BufRead,BufNewFile *.less set filetype=less
 "ejs 高亮
 au BufNewFile,BufRead *.ejs set filetype=html
+
 "crontab
 autocmd filetype crontab setlocal nobackup nowritebackup
-
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
-
-nnoremap <C-z> :shell<CR>
-
-"自动补全括号
-inoremap ( ()<LEFT>
-inoremap [ []<LEFT>
-inoremap { {}<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-"inoremap { {}<ESC>i<CR><ESC>V<O
 
