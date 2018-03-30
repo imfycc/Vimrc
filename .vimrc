@@ -96,11 +96,7 @@ Plugin 'dyng/ctrlsf.vim'
 "Plugin 'tpope/vim-surround'
 "Plugin 'vim-scripts/vim-auto-save'
 Plugin 'godlygeek/tabular'
-"Plugin: Themes
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'molokai'
-Plugin 'dracula/vim'
-"Plugin 'ashfinal/vim-colors-violet'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'posva/vim-vue'
 Plugin 'mxw/vim-jsx'
@@ -212,12 +208,10 @@ if has('gui_running')
   let g:solarized_termcolors=256
   set background=light
   colorscheme solarized
-  "colorscheme dracula
-  "colorscheme violet
 else
   let g:molokai_original = 1
   let g:rehash256 = 1
-  colorscheme molokai
+  colorscheme desert
 endif
 
 nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
@@ -285,4 +279,5 @@ inoremap [ []<LEFT>
 inoremap { {}<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
+"inoremap { {}<ESC>i<CR><ESC>V<O
 
