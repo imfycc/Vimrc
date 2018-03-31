@@ -21,7 +21,6 @@ set confirm                                        " 在处理未保存或只读
 set linebreak                                      " 合适的地方折行 ^I!@*-+_;:,./?
 set noeb                                           " 不要错误提示音
 
-"缩进
 set autoindent                                     " 语法自动缩进
 set cindent                                        " 类似C语言程序的缩进
 set tabstop=2                                      " 一个TAB字符占多少个空格的位置
@@ -81,7 +80,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'                     " 项目目录树
 Plug 'jistr/vim-nerdtree-tabs'                 " 标签页项目树
-Plug 'bling/vim-airline'                       " 状态栏显示
+Plug 'vim-airline/vim-airline'                 " 状态栏显示
 Plug 'airblade/vim-gitgutter'                  " git 显示文件的修改情况
 Plug 'Yggdroot/indentLine'                     " 展示代码缩进对齐线
 Plug 'mileszs/ack.vim'                         " ag 文件内容搜索
