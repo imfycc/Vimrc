@@ -5,34 +5,17 @@
 ## 特色
 
 * 无需配置，下载即用
-* 自动安装 [Vundle](https://github.com/VundleVim/Vundle.vim) 以及各种插件
+* 自动安装 [Vim-plug](https://github.com/junegunn/vim-plug) 以及各种插件
 * 自用，同步更新
 * MacVim / Vim 通用
-* 前端 react / vue / javascript / Emmet / jade / less / sass / mxml / coffeeScript 等语法支持
+* 前端 react / vue / javascript / Emmet / less / sass 等语法支持
 * css / less / scss 色彩显示
-* Elixir / ruby / nginx 等编程语言及 web 相关支持
-* 无限历史记录，即使文件被关闭
-* 空格补全
 * [solarized](https://github.cooooooooooooom/altercation/vim-colors-solarized) 主题
 * 各设置均带注释方便学习
-
-## 内置插件
-
-[NERD_tree](https://github.com/scrooloose/nerdtree) 文件目录插件
-
-[Powerline](https://github.com/powerline/powerline) 状态栏插件
-
-[Tabularize](https://github.com/godlygeek/tabular) 对齐
-
-[Gundo](https://github.com/sjl/gundo.vim)  历史版本可视化
-
-...
 
 ## 安装
 
 下载使用即可。
-
-第一次打开 `Vim` 的时候，会自动安装 Vundle 和相关的插件。（大约一分钟左右）
 
 如果启用 [ctrlsf.vim](https://github.com/dyng/ctrlsf.vim) 插件（项目内搜索），`Mac OS` 需要预装 `ack`
 
