@@ -80,11 +80,12 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'                     " 项目目录树
 Plug 'jistr/vim-nerdtree-tabs'                 " 标签页项目树
-Plug 'vim-airline/vim-airline'                 " 状态栏显示
+Plug 'itchyny/lightline.vim'                   " 状态栏显示
 Plug 'airblade/vim-gitgutter'                  " git 显示文件的修改情况
 Plug 'Yggdroot/indentLine'                     " 展示代码缩进对齐线
 Plug 'mileszs/ack.vim'                         " ag 文件内容搜索
-Plug 'altercation/vim-colors-solarized'        " solarized 主题
+"Plug 'altercation/vim-colors-solarized'        " solarized 主题
+Plug 'rakr/vim-one'                            " one 主题
 Plug 'posva/vim-vue'                           " 前端库 Vue
 Plug 'groenewege/vim-less'                     " 前端 less
 Plug 'pangloss/vim-javascript'                 " 前端 js
@@ -136,12 +137,18 @@ if has('gui_running')
   syntax enable
   let g:solarized_termcolors=256
   set background=light
-  colorscheme solarized
+  "colorscheme solarized
+  colorscheme one
 else
   let g:molokai_original = 1
   let g:rehash256 = 1
   colorscheme desert
 endif
+
+" 状态栏主题设置
+let g:lightline = {
+     \ 'colorscheme': 'one',
+     \ }
 
 " 背景颜色切换 \ + b
 nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
