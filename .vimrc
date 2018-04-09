@@ -178,6 +178,12 @@ inoremap <C-s> <ESC>:update<CR>a
 "小程序 .wpy 后缀识别成 vue 文件
 au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
 
+" python 文件的缩进格式
+au BufNewFile,BufRead *.py
+\ set tabstop=4
+\ set softtabstop=4
+\ set shiftwidth=4
+
 "ejs 高亮
 au BufNewFile,BufRead *.ejs set filetype=html
 
