@@ -56,3 +56,9 @@ one 主题 dark
 
 ![one](https://ws3.sinaimg.cn/large/006tKfTcly1fpx2u53bocj31kw0up7eu.jpg)
 
+
+## TODO
+
+- [ ] 语法检查 vim-syntastic/syntastic elixir python js less sass
+- [ ] 代码补全 YouCompleteMe 和 vim 的快捷键
+
