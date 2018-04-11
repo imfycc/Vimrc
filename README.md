@@ -31,11 +31,11 @@ brew install the_silver_searcher
 ### 如果已经安装了 [Node.js](https://nodejs.org/en/)
 
 ```
-npm -g install instant-markdown-d
+npm -g install instant-markdown
 
 or
 
-yarn global add instant-markdown-d
+yarn global add instant-markdown
 ```
 
 ## 截图
