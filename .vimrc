@@ -78,24 +78,25 @@ endif
 " 插件管理
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'                     " 项目目录树
-Plug 'jistr/vim-nerdtree-tabs'                 " 标签页项目树
-Plug 'itchyny/lightline.vim'                   " 状态栏显示
-Plug 'airblade/vim-gitgutter'                  " git 显示文件的修改情况
-Plug 'Yggdroot/indentLine'                     " 展示代码缩进对齐线
-Plug 'mileszs/ack.vim'                         " ag 文件内容搜索
-"Plug 'altercation/vim-colors-solarized'        " solarized 主题
-Plug 'rakr/vim-one'                            " one 主题
-Plug 'posva/vim-vue'                           " 前端库 Vue
-Plug 'groenewege/vim-less'                     " 前端 less
-Plug 'pangloss/vim-javascript'                 " 前端 js
-Plug 'mxw/vim-jsx'                             " 前端库 React
-Plug 'mattn/emmet-vim'                         " 前端 快捷补全
-Plug 'gko/vim-coloresque'                      " CSS颜色显示
-Plug 'elixir-lang/vim-elixir'                  " 新语言 elixir
-Plug 'rhysd/vim-gfm-syntax'                    " markdown
-Plug 'suan/vim-instant-markdown'               " markdown 预览
-Plug 'Raimondi/delimitMate'                    " 引号、括号自动匹配
+Plug 'scrooloose/nerdtree'                                               " 项目目录树
+Plug 'jistr/vim-nerdtree-tabs'                                           " 标签页项目树
+Plug 'itchyny/lightline.vim'                                             " 状态栏显示
+Plug 'airblade/vim-gitgutter'                                            " git 显示文件的修改情况
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle'}                 " 展示代码缩进对齐线
+Plug 'dyng/ctrlsf.vim'                                                   " 文件内搜索
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                        " 搜索文件 类似于 ctrlp
+"Plug 'altercation/vim-colors-solarized'                                 " solarized 主题
+Plug 'rakr/vim-one'                                                      " one 主题
+Plug 'posva/vim-vue'                                                     " 前端库 Vue
+Plug 'groenewege/vim-less', { 'for': 'less' }                            " 前端 less
+Plug 'pangloss/vim-javascript'                                           " 前端 js
+Plug 'mxw/vim-jsx'                                                       " 前端库 React
+Plug 'mattn/emmet-vim'                                                   " 前端 快捷补全
+Plug 'gko/vim-coloresque', { 'for': ['html', 'css', 'scss', 'less'] }    " CSS颜色显示
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }                       " 新语言 elixir
+Plug 'rhysd/vim-gfm-syntax', { 'for': 'markdown' }                       " markdown
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }                  " markdown 预览
+Plug 'Raimondi/delimitMate'                                              " 引号、括号自动匹配
 
 call plug#end()
 
@@ -126,8 +127,11 @@ let g:indent_guides_guide_size=1                     " 色块宽度
 autocmd InsertEnter *.json setlocal concealcursor=
 autocmd InsertLeave *.json setlocal concealcursor=inc
 
-" Plugin: ack.vim 使用 ag 在项目内搜索文件内容"
-let g:ackprg = 'ag --vimgrep'
+" Plugin: ctrlsf.vim 项目内搜索文件内容
+let g:ctrlsf_default_root = 'project'
+
+" Plugin: leaderF.vim 搜索文件
+let g:Lf_ShortcutF = '<C-P>'
 
 " Plugin: vim-jsx .js 后缀的 jsx 文件
 let g:jsx_ext_required = 0
@@ -136,6 +140,7 @@ let g:jsx_ext_required = 0
 if has('gui_running')
   syntax enable
   let g:solarized_termcolors=256
+  "set background=dark
   set background=light
   "colorscheme solarized
   colorscheme one
