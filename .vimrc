@@ -41,7 +41,7 @@ set history=1000                                   " 记录1000条历史
 set gdefault                                       " 行内替换
 set viminfo+=!                                     " 保存全局变量
 set mouse=a                                        " 使用鼠标
-set selection=exclusive                            " 光标所在位置不属于被选中的范围
+"set selection=exclusive                            " 光标所在位置不属于被选中的范围
 set selectmode=mouse,key                           " 鼠标键盘都可以选择文本
 set report=0                                       " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 set shortmess=atl                                  " 启动的时候不显示那个援助索马里儿童的提示
@@ -49,7 +49,7 @@ set showmatch                                      " 高亮显示对应的括号
 set matchtime=5                                    " 匹配括号高亮的时间（单位是十分之一秒）
 set fillchars=vert:\ ,stl:\ ,stlnc:\               " 在被分割的窗口间显示空白，便于阅读
 set completeopt=longest,menu                       " 打开文件类型检测, 加了这句才可以用智能补全
-set autochdir                                      " 自动切换当前目录为当前文件的目录
+"set autochdir                                      " 自动切换当前目录为当前文件的目录 //会影响搜索等，禁用了
 set guioptions-=m                                  " 隐藏菜单栏
 set guioptions-=T                                  " 隐藏工具栏
 set guioptions-=L                                  " 隐藏左侧滚动条
@@ -78,11 +78,13 @@ endif
 " 插件管理
 call plug#begin('~/.vim/plugged')
 
+"Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " 项目目录树
 Plug 'scrooloose/nerdtree'                                               " 项目目录树
 Plug 'jistr/vim-nerdtree-tabs'                                           " 标签页项目树
 Plug 'itchyny/lightline.vim'                                             " 状态栏显示
 Plug 'airblade/vim-gitgutter'                                            " git 显示文件的修改情况
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle'}                 " 展示代码缩进对齐线
+Plug 'Yggdroot/indentLine'                                               " 展示代码缩进对齐线
+Plug 'godlygeek/tabular'                                                 " 代码格式化对齐
 Plug 'dyng/ctrlsf.vim'                                                   " 文件内搜索
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                        " 搜索文件 类似于 ctrlp
 "Plug 'altercation/vim-colors-solarized'                                 " solarized 主题
@@ -115,6 +117,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeTy
 let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"                                  " 在右边显示
 let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
+map <C-n> :NERDTreeToggle<CR>
 
 " Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
 let g:jsx_ext_required=0
@@ -128,13 +131,22 @@ autocmd InsertEnter *.json setlocal concealcursor=
 autocmd InsertLeave *.json setlocal concealcursor=inc
 
 " Plugin: ctrlsf.vim 项目内搜索文件内容
+nnoremap <silent> <leader>f :CtrlSF<CR>
 let g:ctrlsf_default_root = 'project'
+" 默认忽略目录
+let g:ctrlsf_ignore_dir = ['node_modules', 'dist', 'bugsnag-sourcemapsUEvDfY']
 
 " Plugin: leaderF.vim 搜索文件
 let g:Lf_ShortcutF = '<C-P>'
 
 " Plugin: vim-jsx .js 后缀的 jsx 文件
 let g:jsx_ext_required = 0
+
+" Plugin: Tabularize
+" hit <leader> twice to auto align codes
+noremap <leader><leader> :Tabularize /from<CR>
+noremap <leader>;        :Tabularize /:/l0<CR>
+noremap <leader>,        :Tabularize /=<CR>
 
 "主题设置
 if has('gui_running')
