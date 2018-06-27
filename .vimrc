@@ -118,6 +118,10 @@ let NERDTreeShowHidden=1                                    " 是否显示隐藏
 let NERDTreeWinPos="right"                                  " 在右边显示
 let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
 map <C-n> :NERDTreeToggle<CR>
+" 打开 vim 时光标定位到编辑区，而不是在 nerdTree 区域
+autocmd VimEnter * NERDTree
+wincmd w
+autocmd VimEnter * wincmd w
 
 " Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
 let g:jsx_ext_required=0
