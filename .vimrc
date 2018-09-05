@@ -15,7 +15,7 @@ set cursorline                                     " 突出显示当前行
 set scrolloff=3                                    " 光标移动到buffer的顶部和底部时保持3行距离
 set ruler                                          " 显示标尺
 set nofoldenable                                   " 不允许折叠
-set guifont=Monaco:h13                             " 字体设置
+set guifont=Monaco:h16                             " 字体设置
 set confirm                                        " 在处理未保存或只读文件的时候，弹出确认
 "set wrap                                          " 换行
 set linebreak                                      " 合适的地方折行 ^I!@*-+_;:,./?
