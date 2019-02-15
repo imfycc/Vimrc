@@ -102,6 +102,10 @@ Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }                       " 新�
 Plug 'rhysd/vim-gfm-syntax', { 'for': 'markdown' }                       " markdown
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }                  " markdown 预览
 Plug 'Raimondi/delimitMate'                                              " 引号、括号自动匹配
+Plug 'scrooloose/nerdcommenter'                                          " 注释插件
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'                                                " git
+Plug 'terryma/vim-multiple-cursors'                                      " 多光标
 
 call plug#end()
 
