@@ -79,8 +79,7 @@ endif
 " 插件管理
 call plug#begin('~/.vim/plugged')
 
-"Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " 项目目录树
-Plug 'scrooloose/nerdtree'                                               " 项目目录树
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " 项目目录树
 Plug 'jistr/vim-nerdtree-tabs'                                           " 标签页项目树
 Plug 'itchyny/lightline.vim'                                             " 状态栏显示
 Plug 'airblade/vim-gitgutter'                                            " git 显示文件的修改情况
@@ -141,8 +140,8 @@ autocmd Filetype javascript.jsx setlocal filetype=jsx
 let g:NERDCustomDelimiters={'javascript': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }}
 
 " Plugin: NERD-tree
-autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeType == "primary") | q | endif
 let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"                                  " 在右边显示
