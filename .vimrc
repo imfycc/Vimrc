@@ -137,6 +137,9 @@ inoremap <C-s> <ESC>:update<CR>a
 let g:user_emmet_leader_key='<C-D>'
 autocmd Filetype javascript.jsx setlocal filetype=jsx
 
+" Plugin: nerdcommenter
+let g:NERDCustomDelimiters={'javascript': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }}
+
 " Plugin: NERD-tree
 autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
