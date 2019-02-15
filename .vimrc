@@ -103,6 +103,26 @@ Plug 'Raimondi/delimitMate'                                              " 引�
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 快捷键设置
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 设置leader建为逗号
+let mapleader = ';'
+let g:mapleader = ';'
+
+" 映射 ESC 键接口：接口：w
+:imap jk <Esc>
+
+" 查看单行文字"
+map j gj
+map k gk
+
+"<Ctrl-s> for saving
+map <silent><C-s> :update<CR>
+inoremap <C-s> <ESC>:update<CR>a
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -180,21 +200,6 @@ function! ToggleBackground()
         set background=light
     endif
 endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 快捷键设置
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 映射 ESC 键接口：接口：w
-:imap jk <Esc>
-
-" 查看单行文字"
-map j gj
-map k gk
-
-"<Ctrl-s> for saving
-map <silent><C-s> :update<CR>
-inoremap <C-s> <ESC>:update<CR>a
 
 "小程序 .wpy 后缀识别成 vue 文件
 au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
