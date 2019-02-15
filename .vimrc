@@ -93,6 +93,8 @@ Plug 'rakr/vim-one'                                                      " one �
 Plug 'posva/vim-vue'                                                     " 前端库 Vue
 Plug 'groenewege/vim-less', { 'for': 'less' }                            " 前端 less
 Plug 'pangloss/vim-javascript'                                           " 前端 js
+Plug 'leafgarland/typescript-vim'                                        " typescript highlight
+Plug 'HerringtonDarkholme/yats.vim'                                      " typescript highlight
 Plug 'mxw/vim-jsx'                                                       " 前端库 React
 Plug 'mattn/emmet-vim'                                                   " 前端 快捷补全
 Plug 'gko/vim-coloresque', { 'for': ['html', 'css', 'scss', 'less'] }    " CSS颜色显示
