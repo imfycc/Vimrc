@@ -169,8 +169,8 @@ let g:jsx_ext_required = 0
 " Plugin: Tabularize
 " hit <leader> twice to auto align codes
 noremap <leader><leader> :Tabularize /from<CR>
-noremap <leader>;        :Tabularize /:/l0<CR>
-noremap <leader>,        :Tabularize /=<CR>
+"noremap <leader>;        :Tabularize /:/l0<CR>
+"noremap <leader>,        :Tabularize /=<CR>
 
 "主题设置
 if has('gui_running')
