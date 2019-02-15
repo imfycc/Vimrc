@@ -130,6 +130,9 @@ map k gk
 map <silent><C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>a
 
+" 找到git合并中冲突的地方
+map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件设置
