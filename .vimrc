@@ -9,6 +9,8 @@ set langmenu=zh_CN.UTF-8 helplang=cn
 
 set number                                         " 显示行号
 set t_Co=256                                       " 使用256色
+set hidden                                         " 隐藏buffer 否则会提示保存文件
+set showtabline=2                                  " 为了 lightline-bufferline 显示
 set laststatus=2                                   " 总是显示状态行
 set cmdheight=1                                    " 命令行（在状态行下）的高度，默认为1，这里是2
 set cursorline                                     " 突出显示当前行
@@ -82,6 +84,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " 项目目录树
 Plug 'jistr/vim-nerdtree-tabs'                                           " 标签页项目树
 Plug 'itchyny/lightline.vim'                                             " 状态栏显示
+Plug 'mengelbrecht/lightline-bufferline'                                 " lightline 插件 展示 buffer 栏
 Plug 'airblade/vim-gitgutter'                                            " git 显示文件的修改情况
 Plug 'Yggdroot/indentLine'                                               " 展示代码缩进对齐线
 Plug 'godlygeek/tabular'                                                 " 代码格式化对齐
@@ -181,8 +184,23 @@ noremap <leader><leader> :Tabularize /from<CR>
 "noremap <leader>;        :Tabularize /:/l0<CR>
 "noremap <leader>,        :Tabularize /=<CR>
 
+" Plugin: lightline and lightline-bufferline
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#unnamed      = '[No Name]'
+
+let g:lightline                  = {}
+let g:lightline.colorscheme      = 'one'
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline#bufferline#filename_modifier = ':t' " hidden path
+
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
 "主题设置
 if has('gui_running')
+  set guioptions-=e "如果是 GUI 显示 buffer tab 栏
   syntax enable
   let g:solarized_termcolors=256
   "set background=dark
@@ -194,11 +212,6 @@ else
   let g:rehash256 = 1
   colorscheme desert
 endif
-
-" 状态栏主题设置
-let g:lightline = {
-     \ 'colorscheme': 'one',
-     \ }
 
 " 背景颜色切换 \ + b
 nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
