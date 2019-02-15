@@ -21,7 +21,7 @@ set confirm                                        " 在处理未保存或只读
 set linebreak                                      " 合适的地方折行 ^I!@*-+_;:,./?
 set noeb                                           " 不要错误提示音
 
-set autoindent                                     " 语法自动缩进
+"set autoindent                                     " 语法自动缩进
 set cindent                                        " 类似C语言程序的缩进
 set tabstop=2                                      " 一个TAB字符占多少个空格的位置
 set softtabstop=2                                  " 每次退格将删除X个空格
@@ -37,6 +37,7 @@ set ignorecase                                     " 搜索忽略大小写
 set smartcase                                      " 智能大小写搜索
 set hlsearch                                       " 搜索逐字符高亮
 set incsearch                                      " 输入搜索内容时就显示搜索结果
+set wildmenu                                       " vim 自身命令行模式智能补全
 set history=1000                                   " 记录1000条历史
 set gdefault                                       " 行内替换
 set viminfo+=!                                     " 保存全局变量
