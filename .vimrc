@@ -1,4 +1,3 @@
-
 " 文件编码
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
@@ -8,10 +7,10 @@ set fileencoding=utf-8
 set langmenu=zh_CN.UTF-8 helplang=cn
 
 set number                                         " 显示行号
+set hidden                                         " 隐藏缓冲区 否则会提示保存文件
 set t_Co=256                                       " 使用256色
-set hidden                                         " 隐藏buffer 否则会提示保存文件
-set showtabline=2                                  " 为了 lightline-bufferline 显示
 set laststatus=2                                   " 总是显示状态行
+set showtabline=2                                  " 为了 lightline-bufferline 显示
 set cmdheight=1                                    " 命令行（在状态行下）的高度，默认为1，这里是2
 set cursorline                                     " 突出显示当前行
 set scrolloff=3                                    " 光标移动到buffer的顶部和底部时保持3行距离
@@ -114,10 +113,12 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " 设置leader建为逗号
 let mapleader = ';'
 let g:mapleader = ';'
+
+" 找到git合并中冲突的地方
+map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " 映射 ESC 键接口：接口：w
 :imap jk <Esc>
@@ -130,20 +131,18 @@ map k gk
 map <silent><C-s> :update<CR>
 inoremap <C-s> <ESC>:update<CR>a
 
-" 找到git合并中冲突的地方
-map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
-
+" buffers
+nmap <leader>bq :bp <BAR> bd #<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: nerdcommenter
+let g:NERDCustomDelimiters={'javascript': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }}
 
 " Plugin: emmet
 let g:user_emmet_leader_key='<C-D>'
 autocmd Filetype javascript.jsx setlocal filetype=jsx
-
-" Plugin: nerdcommenter
-let g:NERDCustomDelimiters={'javascript': { 'left': '//', 'right': '', 'leftAlt': '{/*', 'rightAlt': '*/}' }}
 
 " Plugin: NERD-tree
 "autocmd StdinReadPre * let s:std_in=1                       " 随 vim 自启动
@@ -152,11 +151,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeTy
 let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"                                  " 在右边显示
 let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
-map <C-n> :NERDTreeToggle<CR>
-" 打开 vim 时光标定位到编辑区，而不是在 nerdTree 区域
-autocmd VimEnter * NERDTree
-wincmd w
-autocmd VimEnter * wincmd w
+map <leader>n :NERDTreeToggle<CR>
+"打开 vim 时光标定位到编辑区，而不是在 nerdTree 区域
+"autocmd VimEnter * NERDTree
+"wincmd w
+"autocmd VimEnter * wincmd w
 
 " Plugin: vim-jsx 插件配置 在.js文件内支持jsx语法
 let g:jsx_ext_required=0
@@ -184,7 +183,6 @@ let g:jsx_ext_required = 0
 " Plugin: Tabularize
 " hit <leader> twice to auto align codes
 noremap <leader><leader> :Tabularize /from<CR>
-"noremap <leader>;        :Tabularize /:/l0<CR>
 "noremap <leader>,        :Tabularize /=<CR>
 
 " Plugin: lightline and lightline-bufferline
@@ -201,13 +199,14 @@ let g:lightline#bufferline#filename_modifier = ':t' " hidden path
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
+
 "主题设置
 if has('gui_running')
-  set guioptions-=e "如果是 GUI 显示 buffer tab 栏
+  set guioptions-=e
   syntax enable
   let g:solarized_termcolors=256
-  "set background=dark
-  set background=light
+  set background=dark
+  "set background=light
   "colorscheme solarized
   colorscheme one
 else
@@ -217,7 +216,7 @@ else
 endif
 
 " 背景颜色切换 \ + b
-nnoremap <silent> <Leader>b :call ToggleBackground()<CR>
+nnoremap <silent> <Leader>bg :call ToggleBackground()<CR>
 function! ToggleBackground()
     if &background == "light"
         set background=dark
@@ -243,3 +242,4 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
