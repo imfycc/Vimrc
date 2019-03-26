@@ -114,8 +114,8 @@ call plug#end()
 " 快捷键设置
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 设置leader建为逗号
-let mapleader = ';'
-let g:mapleader = ';'
+let mapleader = ','
+let g:mapleader = ','
 
 " 找到git合并中冲突的地方
 map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
@@ -151,7 +151,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeTy
 let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"                                  " 在右边显示
 let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
-map <leader>n :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 "打开 vim 时光标定位到编辑区，而不是在 nerdTree 区域
 "autocmd VimEnter * NERDTree
 "wincmd w
