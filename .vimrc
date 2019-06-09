@@ -22,7 +22,7 @@ set confirm                                        " 在处理未保存或只读
 set linebreak                                      " 合适的地方折行 ^I!@*-+_;:,./?
 set noeb                                           " 不要错误提示音
 
-"set autoindent                                     " 语法自动缩进
+set autoindent                                     " 语法自动缩进
 set cindent                                        " 类似C语言程序的缩进
 set tabstop=2                                      " 一个TAB字符占多少个空格的位置
 set softtabstop=2                                  " 每次退格将删除X个空格
@@ -151,7 +151,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType")&&b:NERDTreeTy
 let NERDTreeShowHidden=1                                    " 是否显示隐藏文件
 let NERDTreeWinPos="right"                                  " 在右边显示
 let NERDTreeIgnore=['.DS_Store']                            " 不显示的文件名单
-map <C-n> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 "打开 vim 时光标定位到编辑区，而不是在 nerdTree 区域
 "autocmd VimEnter * NERDTree
 "wincmd w
