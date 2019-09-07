@@ -169,7 +169,11 @@ autocmd InsertEnter *.json setlocal concealcursor=
 autocmd InsertLeave *.json setlocal concealcursor=inc
 
 " Plugin: ctrlsf.vim 项目内搜索文件内容
+" 搜索当前光标下的内容
 nnoremap <silent> <leader>f :CtrlSF<CR>
+" 全局搜索
+nmap <Leader><Leader>f :CtrlSF<space>
+
 let g:ctrlsf_default_root = 'project'
 " 默认忽略目录
 let g:ctrlsf_ignore_dir = ['node_modules', 'dist', 'bugsnag-sourcemapsUEvDfY']
