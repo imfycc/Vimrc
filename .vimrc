@@ -94,6 +94,7 @@ Plug 'rakr/vim-one'                                                      " one �
 Plug 'posva/vim-vue'                                                     " 前端库 Vue
 Plug 'groenewege/vim-less', { 'for': 'less' }                            " 前端 less
 Plug 'pangloss/vim-javascript'                                           " 前端 js
+Plug 'docunext/closetag.vim'                                             " 前端 HTML tag auto close
 Plug 'leafgarland/typescript-vim'                                        " typescript highlight
 Plug 'HerringtonDarkholme/yats.vim'                                      " typescript highlight
 Plug 'mxw/vim-jsx'                                                       " 前端库 React
