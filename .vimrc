@@ -81,7 +81,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " 项目目录树
-Plug 'jistr/vim-nerdtree-tabs'                                           " 标签页项目树
 Plug 'itchyny/lightline.vim'                                             " 状态栏显示
 Plug 'mengelbrecht/lightline-bufferline'                                 " lightline 插件 展示 buffer 栏
 Plug 'airblade/vim-gitgutter'                                            " git 显示文件的修改情况
@@ -94,13 +93,15 @@ Plug 'rakr/vim-one'                                                      " one �
 Plug 'posva/vim-vue'                                                     " 前端库 Vue
 Plug 'groenewege/vim-less', { 'for': 'less' }                            " 前端 less
 Plug 'pangloss/vim-javascript'                                           " 前端 js
+Plug 'mattn/webapi-vim'                                                  " web-api
 Plug 'docunext/closetag.vim'                                             " 前端 HTML tag auto close
 Plug 'leafgarland/typescript-vim'                                        " typescript highlight
 Plug 'HerringtonDarkholme/yats.vim'                                      " typescript highlight
 Plug 'mxw/vim-jsx'                                                       " 前端库 React
 Plug 'mattn/emmet-vim'                                                   " 前端 快捷补全
 Plug 'gko/vim-coloresque', { 'for': ['html', 'css', 'scss', 'less'] }    " CSS颜色显示
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }                       " 新语言 elixir
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }                       " 语言 elixir
+Plug 'dart-lang/dart-vim-plugin'                                         " 语言 Dart
 Plug 'rhysd/vim-gfm-syntax', { 'for': 'markdown' }                       " markdown
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }                  " markdown 预览
 Plug 'Raimondi/delimitMate'                                              " 引号、括号自动匹配
@@ -108,8 +109,14 @@ Plug 'scrooloose/nerdcommenter'                                          " 注�
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'                                                " git
 Plug 'terryma/vim-multiple-cursors'                                      " 多光标
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }                   " 代码格式化
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }                  " 显示 import 包大小
+Plug 'w0rp/ale'                                                          " for eslint
+Plug 'mhinz/vim-mix-format'                                              " mix format for elixir
+Plug 'vim-syntastic/syntastic'
 
 call plug#end()
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 快捷键设置
@@ -134,6 +141,13 @@ inoremap <C-s> <ESC>:update<CR>a
 
 " buffers
 nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件设置
@@ -169,6 +183,12 @@ let g:indent_guides_guide_size=1                     " 色块宽度
 autocmd InsertEnter *.json setlocal concealcursor=
 autocmd InsertLeave *.json setlocal concealcursor=inc
 
+" Plugin: ale
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+
 " Plugin: ctrlsf.vim 项目内搜索文件内容
 " 搜索当前光标下的内容
 nnoremap <silent> <leader>f :CtrlSF<CR>
@@ -185,10 +205,24 @@ let g:Lf_ShortcutF = '<C-P>'
 " Plugin: vim-jsx .js 后缀的 jsx 文件
 let g:jsx_ext_required = 0
 
+" Plugin: mix format
+let g:mix_format_on_save = 1
+
 " Plugin: Tabularize
 " hit <leader> twice to auto align codes
 noremap <leader><leader> :Tabularize /from<CR>
 "noremap <leader>,        :Tabularize /=<CR>
+
+" Plugin: syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Plugin: lightline and lightline-bufferline
 let g:lightline#bufferline#show_number  = 1
@@ -204,12 +238,12 @@ let g:lightline#bufferline#filename_modifier = ':t' " hidden path
 
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
-
 "主题设置
 if has('gui_running')
   set guioptions-=e
   syntax enable
   let g:solarized_termcolors=256
+
   set background=dark
   "set background=light
   "colorscheme solarized
@@ -220,18 +254,22 @@ else
   colorscheme desert
 endif
 
-" 背景颜色切换 \ + b
+" 背景颜色切换 , + bg
 nnoremap <silent> <Leader>bg :call ToggleBackground()<CR>
 function! ToggleBackground()
-    if &background == "light"
-        set background=dark
-    else
-        set background=light
-    endif
+  let &background = ( &background ==# 'dark'? 'light' : 'dark' )
+  if exists("g:loaded_lightline") && g:colors_name =~# 'one'
+    execute "source " . g:plug_home . "/lightline.vim/autoload/lightline/colorscheme/one.vim"
+    windo call lightline#colorscheme()
+  elseif exists('g:colors_name')
+    exe 'colorscheme ' . g:colors_name
+  endif
 endfunction
 
 "小程序 .wpy 后缀识别成 vue 文件
 au BufRead,BufNewFile *.wpy setlocal filetype=vue.html.javascript.css
+autocmd! BufRead,BufNewFile *.wxml set filetype=html
+autocmd! BufRead,BufNewFile *.wxss set filetype=less
 
 " python 文件的缩进格式
 au BufNewFile,BufRead *.py
