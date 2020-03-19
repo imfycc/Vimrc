@@ -1,6 +1,6 @@
 # Vimrc
 
-注意：只在 Mac OS 上测试过
+:warning: 只在 Mac OS 上测试过
 
 ## 特色
 
@@ -9,8 +9,6 @@
 * 自用，同步更新
 * MacVim / Vim 通用
 * 前端 react / vue / javascript / Emmet / less / sass 等语法支持
-* css / less / scss 色彩显示
-* [solarized](https://github.cooooooooooooom/altercation/vim-colors-solarized) 主题
 * [one](https://github.com/rakr/vim-one) 主题
 * 各设置均带注释方便学习
 
@@ -40,25 +38,199 @@ yarn global add instant-markdown
 
 ## 截图
 
-solarized 主题 light
-
-![Vim 效果图](https://ws2.sinaimg.cn/large/006tNc79ly1ficcyg7glkj31kw0v9qf1.jpg)
-
-solarized 主题 dark
-
-![solarized theme](https://ws3.sinaimg.cn/large/006tKfTcly1fpx30pbv7bj31kw0upwp5.jpg)
-
 one 主题 light
 
-![one theme](https://ws1.sinaimg.cn/large/006tKfTcly1fpx2mwhrp8j31kw0vndqn.jpg)
+![one theme](https://user-gold-cdn.xitu.io/2020/3/19/170f22667d7706d3?w=3346&h=1896&f=png&s=493881)
 
 one 主题 dark
 
-![one](https://ws3.sinaimg.cn/large/006tKfTcly1fpx2u53bocj31kw0up7eu.jpg)
+![one theme](https://user-gold-cdn.xitu.io/2020/3/19/170f2264b1242744?w=3346&h=1896&f=png&s=470269)
+
+## 支持的编程语言或平台
+* javascript、typescript
+* less、css、scss
+* html
+* wepy 框架 .wpy
+* Vue
+* React/jsx
+* markdown
+* elixir
+* dart
+
+## 快捷键
+
+`<leader>` 键为 `,`
+
+`jk` 与 `esc` 功能一致
+
+`<leader>` + `bg` 黑暗模式/高亮模式 切换
+
+`:W` 管理员模式保存
+
+`<leader>` + `w` 快速保存
+
+`Ctrl` +  `s` 保存
+
+`<leader>` + `fc` 找出有冲突的问题
+
+`<leader>` + `bq` 退出当前 buffer
+
+## 插件
+
+### nerdtree
+
+### godlygeek/tabular
+> 代码格式化对齐
+
+### mattn/emmet-vim
+> 前端 快捷补全
+
+#### 文档
+https://docs.emmet.io/
+
+#### 快捷键
+`control` + `d` + `<leader>`
+
+### mhinz/vim-mix-format
+> elixir 格式化代码
+
+#### 快捷键
+`:MixFormat` 格式化当前文件
+
+`:MixFormatDiff` 将打开一个差异窗口，该窗口可用于预览更改或仅选择看起来合理的更改。
+
+`dp` 将更改从差异窗口推送到源文件。
+
+`q` 关闭差异窗口。
+
+`]c` 和`[c` 在更改之间跳转。
 
 
-## TODO
+以下插件基本没有快捷键，属于自动处理或展示类插件
 
-- [ ] 语法检查 vim-syntastic/syntastic elixir python js less sass
-- [ ] 代码补全 YouCompleteMe 和 vim 的快捷键
+|插件|功能|
+|----|----|
+|lightline.vim|状态栏插件|
+|lightline-bufferline|lightline 插件 展示 buffer 栏|
+|Yggdroot/indentLine|展示代码缩进对齐线|
+|airblade/vim-gitgutter|git 显示文件的修改情况|
+|vim-colors-solarized| solarized 主题|
+|vim-one|one 主题|
+|vim-vue|前端库 Vue|
+|vim-jsx|前端库 React|
+|vim-javascript|前端 js|
+|typescript-vim|typescript|
+|yats.vim| typescript highlight|
+|groenewege/vim-less|前端 less|
+|gko/vim-coloresque|CSS颜色显示|
+|webapi-vim| web api|
+|docunext/closetag.vim| 前端 HTML tag auto close|
+|Raimondi/delimitMate|引号、括号自动匹配|
+|vim-elixir|语言 elixir|
+|dart-vim-plugin|语言 Dart|
+|vim-gfm-syntax|markdown|
+|vim-instant-markdown|markdown 预览|
 
+
+## 等待整理
+
+```
+Plug 'dyng/ctrlsf.vim'                                                   " 文件内搜索
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                        " 搜索文件 类似于 ctrlp
+Plug 'scrooloose/nerdcommenter'                                          " 注释插件
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'                                                " git
+Plug 'terryma/vim-multiple-cursors'                                      " 多光标
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }                   " 代码格式化
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }                  " 显示 import 包大小
+Plug 'w0rp/ale'                                                          " for eslint
+Plug 'vim-syntastic/syntastic'
+```
+
+```
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+endif
+
+set wildignore+=*node_modules/**
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+map <leader>bc :BufOnly<cr>
+
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+map <leader>bf :bfirst<cr>
+map <leader>bl :blast<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tq :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>tl :tabnext<cr>
+map <leader>th :tabprevious<cr>
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+nmap <D-j> <M-j>
+nmap <D-k> <M-k>
+vmap <D-j> <M-j>
+vmap <D-k> <M-k>
+endif
+
+" buffer
+nmap <leader>N :enew<cr>
+nmap <leader><Tab> :b #<CR>
+" nmap <leader>h :bp<CR>
+" nmap <leader>l :bn<CR>
+```
