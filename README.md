@@ -58,24 +58,81 @@ one 主题 dark
 
 `jk` 与 `esc` 功能一致
 
-`<leader>` + `bg` 黑暗模式/高亮模式 切换
+`<leader>bg` 黑暗模式/高亮模式 切换
 
 `:W` 管理员模式保存
 
-`<leader>` + `w` 快速保存
+`<leader>w` 快速保存
 
 `Ctrl` +  `s` 保存
 
-`<leader>` + `fc` 找出有冲突的问题
+`<leader>fc` 找出有冲突的问题
 
-`<leader>` + `bq` 退出当前 buffer
+`<leader>bq` 退出当前 buffer
 
 ## 插件
 
 ### nerdtree
 
+### [tpope/vim-surround](https://github.com/tpope/vim-surround)
+> 使用指定的字符包裹选中项
+
+`cs"'` "Hello world!" => 'Hello world!'
+
+`cs'<q>` <q>Hello world!</q>
+
+cst" "Hello world!"
+
+ds" Hello world!
+
+ysiw] (iw is a text object). [Hello] world!
+
+cs]{ { Hello } world!
+
+yss).({ Hello } world!)
+
+ds{ds) Hello world!
+
+ysiw<em> <em>Hello</em> world!
+
+V S<p class="important">.
+
+<p class="important">
+  <em>Hello</em> world!
+</p>
+
+### [scrooloose/nerdcommenter](https://github.com/preservim/nerdcommenter)
+> 注释插件
+
+#### 快捷键
+
+`<leader>cc` 注释当前行
+
+`<leader>cn` 嵌套注释
+
+`<leader>c<space>` 注释和被注释状态切换
+
+`<leader>cm` 多行注释
+
+`<leader>ci` 单行注释状态的切换
+
+`<leader>cs` 带有格式的块注释
+
+`<leader>c$` 注释光标到行位
+
+`<leader>cA` 行位添加注释
+
+`<leader>cu` 解开注释
+
 ### godlygeek/tabular
 > 代码格式化对齐
+
+### [yardnsm/vim-import-cost](https://github.com/yardnsm/vim-import-cost)
+> 显示 import 包大小
+
+`:ImportCost` 显示所有的
+`:ImportCostSingle` 当前行
+`:ImportCostClear` 清除显示
 
 ### mattn/emmet-vim
 > 前端 快捷补全
@@ -100,6 +157,20 @@ https://docs.emmet.io/
 
 `]c` 和`[c` 在更改之间跳转。
 
+###[tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
+> git 集成
+
+```
+:G
+:Git
+:!git
+:Git add
+:Git commit
+:Git diff
+:Git log
+:Git blame :Gblame
+:Gstatus
+```
 
 以下插件基本没有快捷键，属于自动处理或展示类插件
 
@@ -134,12 +205,8 @@ https://docs.emmet.io/
 ```
 Plug 'dyng/ctrlsf.vim'                                                   " 文件内搜索
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                        " 搜索文件 类似于 ctrlp
-Plug 'scrooloose/nerdcommenter'                                          " 注释插件
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'                                                " git
 Plug 'terryma/vim-multiple-cursors'                                      " 多光标
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }                   " 代码格式化
-Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }                  " 显示 import 包大小
 Plug 'w0rp/ale'                                                          " for eslint
 Plug 'vim-syntastic/syntastic'
 ```
