@@ -1,16 +1,11 @@
 # Vimrc
 
-:warning: 只在 Mac OS 上测试过
+:warning: 只在 macOS 上测试过
 
 ## 特色
-
-* 无需配置，下载即用
 * 自动安装 [Vim-plug](https://github.com/junegunn/vim-plug) 以及各种插件
 * 自用，同步更新
-* MacVim / Vim 通用
 * 前端 react / vue / javascript / Emmet / less / sass 等语法支持
-* [one](https://github.com/rakr/vim-one) 主题
-* 各设置均带注释方便学习
 
 ## 安装
 
