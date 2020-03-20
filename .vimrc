@@ -84,16 +84,20 @@ Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } " 项�
 Plug 'itchyny/lightline.vim'                                             " 状态栏显示
 Plug 'mengelbrecht/lightline-bufferline'                                 " lightline 插件 展示 buffer 栏
 Plug 'airblade/vim-gitgutter'                                            " git 显示文件的修改情况
+Plug 'tpope/vim-fugitive'                                                " git
 Plug 'Yggdroot/indentLine'                                               " 展示代码缩进对齐线
 Plug 'godlygeek/tabular'                                                 " 代码格式化对齐
 Plug 'dyng/ctrlsf.vim'                                                   " 文件内搜索
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }                        " 搜索文件 类似于 ctrlp
-"Plug 'altercation/vim-colors-solarized'                                 " solarized 主题
-Plug 'rakr/vim-one'                                                      " one 主题
+Plug 'altercation/vim-colors-solarized'                                  " 主题 solarized
+Plug 'kaicataldo/material.vim'                                           " 主题 material
+Plug 'arcticicestudio/nord-vim'                                          " 主题 nord
+Plug 'rakr/vim-one'                                                      " 主题 one
 Plug 'posva/vim-vue'                                                     " 前端库 Vue
 Plug 'groenewege/vim-less', { 'for': 'less' }                            " 前端 less
 Plug 'pangloss/vim-javascript'                                           " 前端 js
 Plug 'mattn/webapi-vim'                                                  " web-api
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }                  " 显示 import 包大小
 Plug 'docunext/closetag.vim'                                             " 前端 HTML tag auto close
 Plug 'leafgarland/typescript-vim'                                        " typescript highlight
 Plug 'HerringtonDarkholme/yats.vim'                                      " typescript highlight
@@ -101,18 +105,16 @@ Plug 'mxw/vim-jsx'                                                       " 前�
 Plug 'mattn/emmet-vim'                                                   " 前端 快捷补全
 Plug 'gko/vim-coloresque', { 'for': ['html', 'css', 'scss', 'less'] }    " CSS颜色显示
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }                       " 语言 elixir
+Plug 'mhinz/vim-mix-format'                                              " mix format for elixir
 Plug 'dart-lang/dart-vim-plugin'                                         " 语言 Dart
 Plug 'rhysd/vim-gfm-syntax', { 'for': 'markdown' }                       " markdown
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }                  " markdown 预览
 Plug 'Raimondi/delimitMate'                                              " 引号、括号自动匹配
 Plug 'scrooloose/nerdcommenter'                                          " 注释插件
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'                                                " git
 Plug 'terryma/vim-multiple-cursors'                                      " 多光标
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }                   " 代码格式化
-Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }                  " 显示 import 包大小
 Plug 'w0rp/ale'                                                          " for eslint
-Plug 'mhinz/vim-mix-format'                                              " mix format for elixir
 Plug 'vim-syntastic/syntastic'
 
 call plug#end()
@@ -214,9 +216,9 @@ noremap <leader><leader> :Tabularize /from<CR>
 "noremap <leader>,        :Tabularize /=<CR>
 
 " Plugin: syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
@@ -244,14 +246,23 @@ if has('gui_running')
   syntax enable
   let g:solarized_termcolors=256
 
-  set background=dark
-  "set background=light
-  "colorscheme solarized
-  colorscheme one
+  "set background=dark
+  set background=light
+  "solarized one palenight material nord
+  colorscheme solarized
+  " 主题 material
+  "let g:material_terminal_italics = 1
+  "let g:lightline.colorscheme = 'material_vim'
+  "let g:material_theme_style = 'palenight'
+  "let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
 else
   let g:molokai_original = 1
   let g:rehash256 = 1
-  colorscheme desert
+  colorscheme one
+endif
+
+if (has('termguicolors'))
+  set termguicolors
 endif
 
 " 背景颜色切换 , + bg
