@@ -114,8 +114,10 @@ https://docs.emmet.io/
 |lightline-bufferline|lightline 插件 展示 buffer 栏|
 |Yggdroot/indentLine|展示代码缩进对齐线|
 |airblade/vim-gitgutter|git 显示文件的修改情况|
-|vim-colors-solarized| solarized 主题|
-|vim-one|one 主题|
+|vim-colors-solarized| 主题 solarized|
+|vim-one|主题 one|
+|kaicataldo/material.vim|主题 material|
+|arcticicestudio/nord-vim|主题 nord|
 |vim-vue|前端库 Vue|
 |vim-jsx|前端库 React|
 |vim-javascript|前端 js|
