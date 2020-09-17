@@ -52,7 +52,16 @@ one 主题 dark
 * elixir
 * dart
 
-## 快捷键
+## 原生快捷键
+
+```
+ci'、ci"、ci(、ci[、ci{、ci< - 分别更改这些配对标点符号中的文本内容
+di'、di"、di(或dib、di[、di{或diB、di< - 分别删除这些配对标点符号中的文本内容
+yi'、yi"、yi(、yi[、yi{、yi< - 分别复制这些配对标点符号中的文本内容
+vi'、vi"、vi(、vi[、vi{、vi< - 分别选中这些配对标点符号中的文本内容
+```
+
+## 自定义快捷键
 
 `<leader>` 键为 `,`
 
@@ -75,8 +84,10 @@ one 主题 dark
 ### nerdtree
 
 ### [tpope/vim-surround](https://github.com/tpope/vim-surround)
+
 > 使用指定的字符包裹选中项
 
+```
 `cs"'` "Hello world!" => 'Hello world!'
 
 `cs'<q>` <q>Hello world!</q>
@@ -95,11 +106,8 @@ ds{ds) Hello world!
 
 ysiw<em> <em>Hello</em> world!
 
-V S<p class="important">.
+```
 
-<p class="important">
-  <em>Hello</em> world!
-</p>
 
 ### [scrooloose/nerdcommenter](https://github.com/preservim/nerdcommenter)
 > 注释插件
